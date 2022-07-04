@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "EditorConfig.EditorConfig"
+        "editorconfig.editorconfig",
+        "styled-components.vscode-styled-components"
     ]
 }

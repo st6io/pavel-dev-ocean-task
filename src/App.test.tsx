@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders the task title', () => {
+it('should redirect to businesses page', () => {
   render(<App />);
-  const titleElement = screen.getByText(/DevOcean React Task/i);
+
+  const titleElement = screen.queryByText(/DevOcean React Task/i);
   expect(titleElement).toBeInTheDocument();
 });

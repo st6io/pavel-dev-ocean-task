@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
+import { Path } from '../../../constants/Path';
 import logo from './logo.png';
 
 const StyledHeader = styled.header`
@@ -22,10 +24,16 @@ const Logo = styled.img`
   margin-right: 10px;
 `;
 
+const StyledLink = styled(Link)`
+  margin-left: 20px;
+  text-decoration: none;
+`;
+
 const Header = () => (
   <StyledHeader>
     <Logo src={logo} alt="DevOcean React Logo" />
     <Title>DevOcean React Task</Title>
+    <StyledLink to={Path.Root}>Home page</StyledLink>
   </StyledHeader>
 );
 

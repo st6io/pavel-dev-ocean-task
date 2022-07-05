@@ -8,6 +8,7 @@ import BusinessesPage from './pages/Businesses';
 import BusinessPage from './pages/Business';
 import GlobalStyles from './components/GlobalStyles';
 import Header from './components/layout/Header';
+import NotFoundPage from './pages/NotFound';
 
 const App = () => (
   <BrowserRouter>
@@ -22,6 +23,8 @@ const App = () => (
       <Route path={Path.Business}>
         <Route path=":id" element={<BusinessPage />} />
       </Route>
+
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   </BrowserRouter>
 );

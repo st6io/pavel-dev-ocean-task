@@ -1,6 +1,6 @@
 import { fireEvent, screen } from '@testing-library/react';
 import BusinessesPage from '.';
-import useBusinesses from '../../hooks/use-businesses';
+import { useBusinesses } from '../../hooks/use-businesses';
 import render from '../../tests/renderWithContext';
 
 const mockData = [

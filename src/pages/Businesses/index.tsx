@@ -1,7 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import styled from '@emotion/styled';
 import { BusinessResume } from '../../types/BusinessResume';
-import useBusinesses from '../../hooks/use-businesses';
+import { useBusinesses } from '../../hooks/use-businesses';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../../constants/Path';
 

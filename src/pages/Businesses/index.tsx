@@ -1,7 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import styled from '@emotion/styled';
-import { BusinessResume } from '../types/BusinessResume';
-import useBusinesses from '../hooks/use-businesses';
+import { BusinessResume } from '../../types/BusinessResume';
+import useBusinesses from '../../hooks/use-businesses';
 
 interface TableRowProps {
   first: React.ReactElement;
@@ -56,6 +56,18 @@ const ScrollableContainer = styled(Container)`
   overflow-y: auto;
 `;
 
+const NoDataMessage = () => <span>There are no businesses data</span>;
+
+const BusinessesTable = ({ businesses }: { businesses: BusinessResume[] }) => (
+  <>
+    <Header />
+
+    {businesses.map(({ id, name, description }: BusinessResume) => (
+      <StyledDataRow key={id} name={name} description={description} />
+    ))}
+  </>
+);
+
 // TODO: Floating header
 // TODO: Pagination
 const BusinessesPage = () => {
@@ -63,11 +75,7 @@ const BusinessesPage = () => {
 
   return (
     <ScrollableContainer>
-      <Header />
-
-      {businesses.map(({ id, name, description }: BusinessResume) => (
-        <StyledDataRow key={id} name={name} description={description} />
-      ))}
+      {businesses.length ? <BusinessesTable businesses={businesses} /> : <NoDataMessage />}
     </ScrollableContainer>
   );
 };

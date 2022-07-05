@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Container, Row, Col } from 'react-bootstrap';
+import Section from '../components/SectionWithTitle';
 
 const StyledContainer = styled(Container)`
   margin-top: 30px;
@@ -63,23 +64,11 @@ const BusinessPage = () => (
       <Col md={5}>
         <Row>
           <ContentCol md={6}>
-            <Header>Address</Header>
-            <Row>
-              <Span>first line here</Span>
-            </Row>
-            <Row>
-              <Span>second line here</Span>
-            </Row>
+            <Section title="Address" firstRow="first line here" secondRow="second line here" />
           </ContentCol>
 
           <ContentCol md={6}>
-            <Header>Contact</Header>
-            <Row>
-              <Span>first line here</Span>
-            </Row>
-            <Row>
-              <Span>second line here</Span>
-            </Row>
+            <Section title="Contact" firstRow="first line here" secondRow="second line here" />
           </ContentCol>
         </Row>
       </Col>

@@ -1,7 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import styled from '@emotion/styled';
-import dataMock from '../data/businesses.json';
 import { BusinessResume } from '../types/BusinessResume';
+import useBusinesses from '../hooks/use-businesses';
 
 interface TableRowProps {
   first: React.ReactElement;
@@ -26,7 +26,7 @@ const StyledRow = styled(Row)`
   }
 `;
 
-const DataRow = ({ name, description, ...rest }: BusinessResume) => (
+const DataRow = ({ name, description, ...rest }: Omit<BusinessResume, 'id'>) => (
   <TableRow first={<span>{name}</span>} second={<span>{description}</span>} {...rest} />
 );
 
@@ -58,14 +58,18 @@ const ScrollableContainer = styled(Container)`
 
 // TODO: Floating header
 // TODO: Pagination
-const BusinessesPage = () => (
-  <ScrollableContainer>
-    <Header />
+const BusinessesPage = () => {
+  const businesses = useBusinesses();
 
-    {dataMock.map(({ id, name, description }: any) => (
-      <StyledDataRow key={id} name={name} description={description} />
-    ))}
-  </ScrollableContainer>
-);
+  return (
+    <ScrollableContainer>
+      <Header />
+
+      {businesses.map(({ id, name, description }: BusinessResume) => (
+        <StyledDataRow key={id} name={name} description={description} />
+      ))}
+    </ScrollableContainer>
+  );
+};
 
 export default BusinessesPage;

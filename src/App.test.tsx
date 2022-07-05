@@ -4,5 +4,6 @@ import App from './App';
 it('should redirect to businesses page', () => {
   render(<App />);
 
-  expect(screen.getByText('All businesses page')).toBeInTheDocument();
+  expect(screen.getByText('Name')).toBeInTheDocument();
+  expect(screen.getByText('Description')).toBeInTheDocument();
 });

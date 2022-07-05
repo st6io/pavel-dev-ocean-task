@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Container, Row, Col } from 'react-bootstrap';
 import Section from '../components/SectionWithTitle';
+import TableRow from '../components/TableRow';
 
 const StyledContainer = styled(Container)`
   margin-top: 30px;
@@ -34,10 +35,9 @@ const NearbyPlacesContainer = styled(ContentCol)`
   background-color: white;
 `;
 
-const TableRow = styled(Row)`
+const StyledTableRow = styled(TableRow)`
   height: 40px;
   background-color: #f7f7f7;
-  align-items: center;
   margin-bottom: 10px;
 
   &:last-of-type {
@@ -48,6 +48,15 @@ const TableRow = styled(Row)`
 const Span = styled.span`
   color: #6b6a7a;
 `;
+const NearbyPlaces = () => (
+  <Container>
+    <Row>
+      <Header>Nearby Places</Header>
+    </Row>
+
+    <StyledTableRow first={<Span>Place</Span>} second={<Span>Location</Span>} />
+  </Container>
+);
 
 const BusinessPage = () => (
   <StyledContainer>
@@ -74,46 +83,7 @@ const BusinessPage = () => (
       </Col>
 
       <NearbyPlacesContainer>
-        <Container>
-          <Row>
-            <Header>Nearby Places</Header>
-          </Row>
-          <TableRow>
-            <Col md={3}>
-              <Span>Place</Span>
-            </Col>
-            <Col>
-              <Span>Location</Span>
-            </Col>
-          </TableRow>
-
-          <TableRow>
-            <Col md={3}>
-              <Span>Place</Span>
-            </Col>
-            <Col>
-              <Span>Location</Span>
-            </Col>
-          </TableRow>
-
-          <TableRow>
-            <Col md={3}>
-              <Span>Place</Span>
-            </Col>
-            <Col>
-              <Span>Location</Span>
-            </Col>
-          </TableRow>
-
-          <TableRow>
-            <Col md={3}>
-              <Span>Place</Span>
-            </Col>
-            <Col>
-              <Span>Location</Span>
-            </Col>
-          </TableRow>
-        </Container>
+        <NearbyPlaces />
       </NearbyPlacesContainer>
     </InformationRow>
   </StyledContainer>

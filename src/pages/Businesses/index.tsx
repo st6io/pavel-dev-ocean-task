@@ -1,14 +1,10 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import styled from '@emotion/styled';
 import { BusinessResume } from '../../types/BusinessResume';
 import { useBusinesses } from '../../hooks/use-businesses';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../../constants/Path';
-
-interface TableRowProps {
-  first: React.ReactElement;
-  second: React.ReactElement;
-}
+import TableRow from '../../components/TableRow';
 
 const HeaderLabel = styled.span`
   color: purple;
@@ -16,18 +12,16 @@ const HeaderLabel = styled.span`
   font-weight: bold;
 `;
 
-const StyledRow = styled(Row)`
-  height: 70px;
-  background-color: white;
-  align-items: center;
-  transition: background-color 100ms linear;
-`;
-
 const DataRow = ({ name, description, ...rest }: Omit<BusinessResume, 'id'>) => (
   <TableRow first={<span>{name}</span>} second={<span>{description}</span>} {...rest} />
 );
 
 const StyledDataRow = styled(DataRow)`
+  height: 70px;
+  background-color: white;
+  align-items: center;
+  transition: background-color 100ms linear;
+
   &:hover {
     background-color: #f0f0f0;
   }
@@ -46,14 +40,11 @@ const StyledButton = styled.button`
   }
 `;
 
-const TableRow = ({ first, second, ...rest }: TableRowProps) => (
-  <StyledRow {...rest}>
-    <Col md={3}>{first} </Col>
-    <Col>{second}</Col>
-  </StyledRow>
-);
-
 const StyledHeader = styled(TableRow)`
+  height: 70px;
+  background-color: white;
+  align-items: center;
+  transition: background-color 100ms linear;
   margin-bottom: 10px;
   user-select: none;
 `;

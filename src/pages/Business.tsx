@@ -1,7 +1,10 @@
 import styled from '@emotion/styled';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import Section from '../components/SectionWithTitle';
 import TableRow from '../components/TableRow';
+import { useBusiness } from '../hooks/use-business';
+import NotFoundPage from './NotFound';
 
 const StyledContainer = styled(Container)`
   margin-top: 30px;
@@ -48,6 +51,7 @@ const StyledTableRow = styled(TableRow)`
 const Span = styled.span`
   color: #6b6a7a;
 `;
+
 const NearbyPlaces = () => (
   <Container>
     <Row>
@@ -58,35 +62,48 @@ const NearbyPlaces = () => (
   </Container>
 );
 
-const BusinessPage = () => (
-  <StyledContainer>
-    <Row>
-      <Col>
-        <Image
-          src="https://images.unsplash.com/photo-1527015175922-36a306cf0e20?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=1000"
-          alt="TODO"
-        />
-      </Col>
-    </Row>
+const BusinessPage = () => {
+  const params = useParams();
+  const business = useBusiness(params.id as string);
 
-    <InformationRow>
-      <Col md={5}>
-        <Row>
-          <ContentCol md={6}>
-            <Section title="Address" firstRow="first line here" secondRow="second line here" />
-          </ContentCol>
+  if (!business) {
+    return <NotFoundPage />;
+  }
 
-          <ContentCol md={6}>
-            <Section title="Contact" firstRow="first line here" secondRow="second line here" />
-          </ContentCol>
-        </Row>
-      </Col>
+  const { address, email, image, phone, name, description } = business;
+  const { number, street, city, zip, country } = address;
 
-      <NearbyPlacesContainer>
-        <NearbyPlaces />
-      </NearbyPlacesContainer>
-    </InformationRow>
-  </StyledContainer>
-);
+  return (
+    <StyledContainer>
+      <Row>
+        <Col>
+          <Image src={image} alt={`${name} - ${description}`} />
+        </Col>
+      </Row>
+
+      <InformationRow>
+        <Col md={5}>
+          <Row>
+            <ContentCol md={6}>
+              <Section
+                title="Address"
+                firstRow={`${number} ${street}`}
+                secondRow={`${city} ${zip}, ${country}`}
+              />
+            </ContentCol>
+
+            <ContentCol md={6}>
+              <Section title="Contact" firstRow={phone} secondRow={email} />
+            </ContentCol>
+          </Row>
+        </Col>
+
+        <NearbyPlacesContainer>
+          <NearbyPlaces />
+        </NearbyPlacesContainer>
+      </InformationRow>
+    </StyledContainer>
+  );
+};
 
 export default BusinessPage;

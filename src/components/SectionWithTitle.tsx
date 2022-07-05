@@ -11,6 +11,7 @@ const Header = styled.h2`
 
 const Span = styled.span`
   color: #6b6a7a;
+  word-wrap: break-word;
 `;
 
 export interface SectionProps {

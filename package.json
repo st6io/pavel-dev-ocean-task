@@ -47,7 +47,13 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "snapshotSerializers": [
+      "@emotion/jest/serializer"
+    ]
+  },
   "devDependencies": {
+    "@emotion/jest": "11.9.3",
     "eslint-config-prettier": "8.5.0",
     "prettier": "2.7.1"
   }

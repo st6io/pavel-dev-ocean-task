@@ -2,6 +2,8 @@ import { Col, Container, Row } from 'react-bootstrap';
 import styled from '@emotion/styled';
 import { BusinessResume } from '../../types/BusinessResume';
 import useBusinesses from '../../hooks/use-businesses';
+import { useNavigate } from 'react-router-dom';
+import { Path } from '../../constants/Path';
 
 interface TableRowProps {
   first: React.ReactElement;
@@ -18,12 +20,7 @@ const StyledRow = styled(Row)`
   height: 70px;
   background-color: white;
   align-items: center;
-  margin-bottom: 5px;
   transition: background-color 100ms linear;
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
 `;
 
 const DataRow = ({ name, description, ...rest }: Omit<BusinessResume, 'id'>) => (
@@ -36,6 +33,19 @@ const StyledDataRow = styled(DataRow)`
   }
 `;
 
+const StyledButton = styled.button`
+  width: 100%;
+  border: 0;
+  text-align: inherit;
+  padding: 0;
+
+  margin-bottom: 5px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+`;
+
 const TableRow = ({ first, second, ...rest }: TableRowProps) => (
   <StyledRow {...rest}>
     <Col md={3}>{first} </Col>
@@ -43,8 +53,13 @@ const TableRow = ({ first, second, ...rest }: TableRowProps) => (
   </StyledRow>
 );
 
+const StyledHeader = styled(TableRow)`
+  margin-bottom: 10px;
+  user-select: none;
+`;
+
 const Header = () => (
-  <TableRow
+  <StyledHeader
     first={<HeaderLabel>Name</HeaderLabel>}
     second={<HeaderLabel>Description</HeaderLabel>}
   />
@@ -58,15 +73,21 @@ const ScrollableContainer = styled(Container)`
 
 const NoDataMessage = () => <span>There are no businesses data</span>;
 
-const BusinessesTable = ({ businesses }: { businesses: BusinessResume[] }) => (
-  <>
-    <Header />
+const BusinessesTable = ({ businesses }: { businesses: BusinessResume[] }) => {
+  let navigate = useNavigate();
 
-    {businesses.map(({ id, name, description }: BusinessResume) => (
-      <StyledDataRow key={id} name={name} description={description} />
-    ))}
-  </>
-);
+  return (
+    <>
+      <Header />
+
+      {businesses.map(({ id, name, description }: BusinessResume) => (
+        <StyledButton key={id} onClick={() => navigate(Path.Business + `/${id}`)}>
+          <StyledDataRow name={name} description={description} />
+        </StyledButton>
+      ))}
+    </>
+  );
+};
 
 // TODO: Floating header
 // TODO: Pagination

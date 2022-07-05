@@ -19,7 +19,9 @@ const App = () => (
       <Route path={Path.Root} element={<Redirect to={Path.AllBusinesses} />} />
 
       <Route path={Path.AllBusinesses} element={<BusinessesPage />} />
-      <Route path={Path.Business} element={<BusinessPage />} />
+      <Route path={Path.Business}>
+        <Route path=":id" element={<BusinessPage />} />
+      </Route>
     </Routes>
   </BrowserRouter>
 );

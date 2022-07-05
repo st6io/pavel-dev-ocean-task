@@ -1,5 +1,5 @@
 export enum Path {
   Root = '/',
-  AllBusinesses = 'businesses',
-  Business = 'business',
+  AllBusinesses = '/businesses',
+  Business = '/business',
 }

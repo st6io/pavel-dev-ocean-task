@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import BusinessesPage from '.';
 import useBusinesses from '../../hooks/use-businesses';
+import render from '../../tests/renderWithContext';
 
 const mockData = [
   { id: 1, name: 'Business 1', description: 'descr 1' },
@@ -10,7 +11,11 @@ const mockData = [
   { id: 5, name: 'Business 5', description: 'descr 5' },
 ];
 
+const mockNavigate = jest.fn();
 jest.mock('../../hooks/use-businesses.tsx');
+jest.mock('react-router-dom', () => ({
+  useNavigate: () => mockNavigate,
+}));
 
 beforeEach(() => {
   (useBusinesses as any).mockImplementation(() => mockData);
@@ -30,6 +35,14 @@ it('should render kind message when there are no records', () => {
   render(<BusinessesPage />);
 
   expect(screen.getByText('There are no businesses data')).toBeInTheDocument();
+});
+
+it('should navigate to business page on click', () => {
+  render(<BusinessesPage />);
+
+  fireEvent.click(screen.getByText('Business 2'));
+
+  expect(mockNavigate).toHaveBeenCalledWith('/business/2');
 });
 
 it('should change background color on hover', () => {

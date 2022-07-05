@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import NearbyPlaces from '../components/NearbyPlaces';
 import Section from '../components/SectionWithTitle';
-import TableRow from '../components/TableRow';
 import { useBusiness } from '../hooks/use-business';
 import NotFoundPage from './NotFound';
 
@@ -26,41 +26,9 @@ const InformationRow = styled(Row)`
   margin-top: 20px;
 `;
 
-const Header = styled.h2`
-  font-size: 24px;
-  color: #2f2e43;
-  margin: 0;
-  padding: 0;
-  margin-bottom: 10px;
-`;
-
 const NearbyPlacesContainer = styled(ContentCol)`
   background-color: white;
 `;
-
-const StyledTableRow = styled(TableRow)`
-  height: 40px;
-  background-color: #f7f7f7;
-  margin-bottom: 10px;
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
-`;
-
-const Span = styled.span`
-  color: #6b6a7a;
-`;
-
-const NearbyPlaces = () => (
-  <Container>
-    <Row>
-      <Header>Nearby Places</Header>
-    </Row>
-
-    <StyledTableRow first={<Span>Place</Span>} second={<Span>Location</Span>} />
-  </Container>
-);
 
 const BusinessPage = () => {
   const params = useParams();
@@ -99,7 +67,7 @@ const BusinessPage = () => {
         </Col>
 
         <NearbyPlacesContainer>
-          <NearbyPlaces />
+          <NearbyPlaces address={address} />
         </NearbyPlacesContainer>
       </InformationRow>
     </StyledContainer>

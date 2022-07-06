@@ -28,7 +28,6 @@ const Span = styled.span`
 
 const NearbyPlaces = ({ address }: { address: Address }) => {
   const nearbyPlaces = useNearbyPlaces(address);
-  console.log(nearbyPlaces);
 
   return (
     <Container>

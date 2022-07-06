@@ -5,8 +5,7 @@ import { Path } from './constants/Path';
 it('should redirect to businesses page', () => {
   render(<App />);
 
-  expect(screen.getByText('Name')).toBeInTheDocument();
-  expect(screen.getByText('Description')).toBeInTheDocument();
+  expect(window.location.pathname).toEqual(Path.AllBusinesses);
 });
 
 it('should go to NotFound page when url is not matched', () => {

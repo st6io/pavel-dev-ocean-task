@@ -18,7 +18,11 @@ jest.mock('react-router-dom', () => ({
 }));
 
 beforeEach(() => {
-  (useBusinesses as any).mockImplementation(() => mockData);
+  (useBusinesses as any).mockImplementation(() => ({
+    data: { businesses: mockData },
+    loading: false,
+    error: false,
+  }));
 });
 
 it('should render N business resumes', () => {
@@ -30,11 +34,15 @@ it('should render N business resumes', () => {
 });
 
 it('should render kind message when there are no records', () => {
-  (useBusinesses as any).mockImplementation(() => []);
+  (useBusinesses as any).mockImplementation(() => ({
+    data: { businesses: [] },
+    loading: false,
+    error: false,
+  }));
 
   render(<BusinessesPage />);
 
-  expect(screen.getByText('There are no businesses data')).toBeInTheDocument();
+  expect(screen.getByText('There is no businesses data')).toBeInTheDocument();
 });
 
 it('should navigate to business page on click', () => {

@@ -56,13 +56,16 @@ const Header = () => (
   />
 );
 
-const ScrollableContainer = styled(Container)`
+const StyledContainer = styled(Container)`
   margin-top: 20px;
+`;
+
+const ScrollableContainer = styled(StyledContainer)`
   max-height: 80vh;
   overflow-y: auto;
 `;
 
-const NoDataMessage = () => <span>There are no businesses data</span>;
+const NoDataMessage = () => <span>There is no businesses data</span>;
 
 const BusinessesTable = ({ businesses }: { businesses: BusinessResume[] }) => {
   let navigate = useNavigate();
@@ -82,12 +85,31 @@ const BusinessesTable = ({ businesses }: { businesses: BusinessResume[] }) => {
 
 // TODO: Floating header
 // TODO: Pagination
+// TODO: Loading - placeholders & animations
 const BusinessesPage = () => {
-  const businesses = useBusinesses();
+  const { data, loading, error } = useBusinesses();
+
+  if (loading) {
+    return (
+      <StyledContainer>
+        <span>Loading...</span>
+      </StyledContainer>
+    );
+  }
+
+  const businesses = data.businesses;
+
+  if (error || !businesses.length) {
+    return (
+      <StyledContainer>
+        <NoDataMessage />
+      </StyledContainer>
+    );
+  }
 
   return (
     <ScrollableContainer>
-      {businesses.length ? <BusinessesTable businesses={businesses} /> : <NoDataMessage />}
+      <BusinessesTable businesses={businesses} />
     </ScrollableContainer>
   );
 };

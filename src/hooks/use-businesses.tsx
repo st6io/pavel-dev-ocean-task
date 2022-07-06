@@ -1,4 +1,4 @@
-import dataMock from '../data/businesses.json';
-import { Business } from '../types/Business';
+import { QueryResult, useQuery } from '@apollo/client';
+import { getAllBusinesses } from '../queries/get-all-businesses';
 
-export const useBusinesses = (): Business[] => dataMock;
+export const useBusinesses = (): QueryResult => useQuery(getAllBusinesses);

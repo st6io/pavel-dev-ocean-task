@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import styled from '@emotion/styled';
 import { Container, Row } from 'react-bootstrap';
 import { useNearbyPlaces } from '../hooks/use-nearby-places';
@@ -24,10 +25,30 @@ const StyledTableRow = styled(TableRow)`
 
 const Span = styled.span`
   color: #6b6a7a;
+  word-wrap: break-word;
+  font-size: 14px;
+  line-height: 20px;
 `;
+
+const NoDataMessage = () => <span>There's no data :(</span>;
 
 const NearbyPlaces = ({ address }: { address: Address }) => {
   const nearbyPlaces = useNearbyPlaces(address);
+
+  const Table = useCallback(
+    () => (
+      <>
+        {nearbyPlaces.map(({ id, name, address: { number, street, city, zip, country } }) => (
+          <StyledTableRow
+            key={id}
+            first={<Span>{name}</Span>}
+            second={<Span>{`${number} ${street}, ${city} ${zip}, ${country}`}</Span>}
+          />
+        ))}
+      </>
+    ),
+    [nearbyPlaces],
+  );
 
   return (
     <Container>
@@ -35,13 +56,7 @@ const NearbyPlaces = ({ address }: { address: Address }) => {
         <Header>Nearby Places</Header>
       </Row>
 
-      {nearbyPlaces.map(({ id, name, address: { number, street, city, zip, country } }) => (
-        <StyledTableRow
-          key={id}
-          first={<Span>{name}</Span>}
-          second={<Span>{`${number} ${street}, ${city} ${zip}, ${country}`}</Span>}
-        />
-      ))}
+      {nearbyPlaces.length ? <Table /> : <NoDataMessage />}
     </Container>
   );
 };

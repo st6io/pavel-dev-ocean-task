@@ -22,6 +22,8 @@ const App = () => (
       <Route path={Path.AllBusinesses} element={<BusinessesPage />} />
       <Route path={Path.Business}>
         <Route path=":id" element={<BusinessPage />} />
+
+        <Route index element={<Redirect to={Path.AllBusinesses} />} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

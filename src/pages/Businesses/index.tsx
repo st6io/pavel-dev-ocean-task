@@ -1,5 +1,6 @@
 import { Container } from 'react-bootstrap';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 
 import { BusinessResume } from '../../types/BusinessResume';
@@ -7,8 +8,15 @@ import { useBusinesses } from '../../hooks/use-businesses';
 import { Path } from '../../constants/Path';
 
 import TableRow from '../../components/TableRow';
-import LoadingIndicator from '../../components/LoadingIndicator';
 import Button from '../../components/SimpleButton';
+
+import Skeleton from './Skeleton';
+
+const commonRowStyles = css`
+  height: 70px;
+  background-color: white;
+  align-items: center;
+`;
 
 const HeaderLabel = styled.span`
   color: purple;
@@ -21,9 +29,7 @@ const DataRow = ({ name, description, ...rest }: Omit<BusinessResume, 'id'>) => 
 );
 
 const StyledDataRow = styled(DataRow)`
-  height: 70px;
-  background-color: white;
-  align-items: center;
+  ${commonRowStyles}
   transition: background-color 100ms linear;
 
   &:hover {
@@ -32,10 +38,7 @@ const StyledDataRow = styled(DataRow)`
 `;
 
 const StyledHeader = styled(TableRow)`
-  height: 70px;
-  background-color: white;
-  align-items: center;
-  transition: background-color 100ms linear;
+  ${commonRowStyles}
   margin: 0;
   margin-bottom: 10px;
   user-select: none;
@@ -85,7 +88,7 @@ const Content = () => {
   const { data, loading, error } = useBusinesses();
 
   if (loading) {
-    return <LoadingIndicator />;
+    return <Skeleton />;
   }
 
   const businesses = data.businesses;
@@ -97,7 +100,6 @@ const Content = () => {
 };
 
 // TODO: Pagination
-// TODO: Loading - placeholders & animations
 const BusinessesPage = () => (
   <StyledContainer>
     <Content />

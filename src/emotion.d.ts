@@ -5,6 +5,15 @@ declare module '@emotion/react' {
     colors: {
       font: string;
       heading: string;
+      tableLabel: string;
+      tableRowHover: string;
+      tableRow: string;
+      nearbyPlacesContainerBackground: string;
+      sectionRowBackground: string;
     };
+    space: number[];
+    spacePx: string[];
+    fontSize: string[];
+    lineHeight: string[];
   }
 }

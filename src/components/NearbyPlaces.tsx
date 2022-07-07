@@ -9,21 +9,21 @@ import TableRow from './TableRow';
 import Button from './SimpleButton';
 
 const Header = styled.h2`
-  font-size: 24px;
-  color: ${(props) => props.theme.colors.headingColor};
+  font-size: ${(props) => props.theme.fontSize[2]};
+  color: ${(props) => props.theme.colors.heading};
   margin: 0;
   padding: 0;
-  margin-bottom: 10px;
+  margin-bottom: ${(props) => props.theme.spacePx[2]};
 `;
 
 const StyledTableRow = styled(TableRow)`
   height: 40px;
-  background-color: #f7f7f7;
-  margin-bottom: 10px;
+  background-color: ${(props) => props.theme.colors.sectionRowBackground};
+  margin-bottom: ${(props) => props.theme.spacePx[2]};
   transition: background-color 100ms linear;
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: ${(props) => props.theme.colors.tableRowHover};
   }
 
   &:last-of-type {
@@ -34,8 +34,8 @@ const StyledTableRow = styled(TableRow)`
 const Span = styled.span`
   color: ${(props) => props.theme.colors.font};
   word-wrap: break-word;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: ${(props) => props.theme.fontSize[0]};
+  line-height: ${(props) => props.theme.lineHeight[0]};
 `;
 
 const NoDataMessage = () => <span>There's no data :(</span>;

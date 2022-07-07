@@ -14,12 +14,11 @@ import Skeleton from './Skeleton';
 
 const commonRowStyles = css`
   height: 70px;
-  background-color: white;
   align-items: center;
 `;
 
 const HeaderLabel = styled.span`
-  color: purple;
+  color: ${(props) => props.theme.colors.tableLabel};
   text-transform: uppercase;
   font-weight: bold;
 `;
@@ -31,16 +30,18 @@ const DataRow = ({ name, description, ...rest }: Omit<BusinessResume, 'id'>) => 
 const StyledDataRow = styled(DataRow)`
   ${commonRowStyles}
   transition: background-color 100ms linear;
+  background-color: ${(props) => props.theme.colors.tableRow};
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: ${(props) => props.theme.colors.tableRowHover};
   }
 `;
 
 const StyledHeader = styled(TableRow)`
   ${commonRowStyles}
+  background-color: ${(props) => props.theme.colors.tableRow};
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: ${(props) => props.theme.spacePx[2]};
   user-select: none;
 `;
 
@@ -52,7 +53,7 @@ const Header = () => (
 );
 
 const StyledContainer = styled(Container)`
-  margin-top: 20px;
+  margin-top: ${(props) => props.theme.spacePx[4]};
 `;
 
 const ScrollableContainer = styled(Container)`

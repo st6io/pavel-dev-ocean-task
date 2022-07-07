@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Path } from '../constants/Path';
 
 const StyledContainer = styled(Container)`
-  margin-top: 10px;
+  margin-top: ${(props) => props.theme.spacePx[2]};
 `;
 
 const StyledLink = styled(Link)`

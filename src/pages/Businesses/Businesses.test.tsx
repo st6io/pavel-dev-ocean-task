@@ -1,6 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react';
 import BusinessesPage from '.';
 import { useBusinesses } from '../../hooks/use-businesses';
+import { getAllSkeletons } from '../../tests/helpers';
 import render from '../../tests/renderWithContext';
 
 const mockData = [
@@ -58,8 +59,6 @@ it('should render kind message when there is an error', () => {
 });
 
 it('should render a loading indicator while loading', () => {
-  const skeletonSelector = 'span.react-loading-skeleton';
-
   (useBusinesses as any).mockImplementation(() => ({
     data: { businesses: mockData },
     loading: true,
@@ -68,13 +67,7 @@ it('should render a loading indicator while loading', () => {
 
   render(<BusinessesPage />);
 
-  const skeletonsCount = Array.from(
-    // Hacky select, inspired by react-loading-skeleton tests
-    // https://github.com/dvtng/react-loading-skeleton/blob/master/src/__tests__/__helpers__/index.ts#L5
-    // eslint-disable-next-line testing-library/no-node-access
-    document.querySelectorAll<HTMLElement>(skeletonSelector),
-  ).length;
-
+  const skeletonsCount = getAllSkeletons().length;
   expect(skeletonsCount).toEqual(11);
 });
 

@@ -5,9 +5,10 @@ import { useParams } from 'react-router-dom';
 import { useBusiness } from '../../hooks/use-business';
 import NotFoundPage from '../NotFound';
 
-import LoadingIndicator from '../../components/LoadingIndicator';
 import NearbyPlaces from '../../components/NearbyPlaces';
 import Section from '../../components/SectionWithTitle';
+
+import Skeleton from './Skeleton';
 
 const StyledContainer = styled(Container)`
   margin-top: 30px;
@@ -42,7 +43,7 @@ const BusinessPage = () => {
   if (loading) {
     return (
       <StyledContainer>
-        <LoadingIndicator />
+        <Skeleton />
       </StyledContainer>
     );
   }

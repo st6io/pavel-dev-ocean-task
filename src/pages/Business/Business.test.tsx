@@ -2,6 +2,7 @@ import { screen } from '@testing-library/react';
 import BusinessPage from '.';
 import { useBusiness } from '../../hooks/use-business';
 import { useNearbyPlaces } from '../../hooks/use-nearby-places';
+import { getAllSkeletons } from '../../tests/helpers';
 import render from '../../tests/renderWithContext';
 
 jest.mock('../../hooks/use-business.tsx');
@@ -87,7 +88,8 @@ it('should render a loading indicator while loading', () => {
 
   render(<BusinessPage />);
 
-  expect(screen.getByText('Loading...')).toBeInTheDocument();
+  const skeletonsCount = getAllSkeletons().length;
+  expect(skeletonsCount).toEqual(4);
 });
 
 describe('Styles', () => {

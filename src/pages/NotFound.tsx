@@ -1,6 +1,7 @@
 import { Container, Row } from 'react-bootstrap';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
+
 import { Path } from '../constants/Path';
 
 const StyledContainer = styled(Container)`

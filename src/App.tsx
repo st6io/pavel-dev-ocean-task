@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Global } from '@emotion/react';
+import { Global, ThemeProvider } from '@emotion/react';
 import { ApolloProvider } from '@apollo/client';
 
 import { Path } from './constants/Path';
+import { theme } from './constants/theme';
 import Redirect from './components/Redirect';
 import GlobalStyles from './components/GlobalStyles';
 import Header from './components/layout/Header';
@@ -15,22 +16,24 @@ import NotFoundPage from './pages/NotFound';
 const App = () => (
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <Global styles={GlobalStyles} />
+      <ThemeProvider theme={theme}>
+        <Global styles={GlobalStyles} />
 
-      <Header />
+        <Header />
 
-      <Routes>
-        <Route path={Path.Root} element={<Redirect to={Path.AllBusinesses} />} />
+        <Routes>
+          <Route path={Path.Root} element={<Redirect to={Path.AllBusinesses} />} />
 
-        <Route path={Path.AllBusinesses} element={<BusinessesPage />} />
-        <Route path={Path.Business}>
-          <Route path=":id" element={<BusinessPage />} />
+          <Route path={Path.AllBusinesses} element={<BusinessesPage />} />
+          <Route path={Path.Business}>
+            <Route path=":id" element={<BusinessPage />} />
 
-          <Route index element={<Redirect to={Path.AllBusinesses} />} />
-        </Route>
+            <Route index element={<Redirect to={Path.AllBusinesses} />} />
+          </Route>
 
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </ThemeProvider>
     </BrowserRouter>
   </ApolloProvider>
 );

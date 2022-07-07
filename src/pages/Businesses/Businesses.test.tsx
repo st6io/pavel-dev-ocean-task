@@ -15,6 +15,7 @@ const mockData = [
 const mockNavigate = jest.fn();
 jest.mock('../../hooks/use-businesses.tsx');
 jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
 

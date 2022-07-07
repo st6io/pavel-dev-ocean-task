@@ -1,9 +1,12 @@
 import { useCallback } from 'react';
 import styled from '@emotion/styled';
 import { Container, Row } from 'react-bootstrap';
+
 import { useNearbyPlaces } from '../hooks/use-nearby-places';
 import { Address } from '../types/Address';
+
 import TableRow from './TableRow';
+import Button from './SimpleButton';
 
 const Header = styled.h2`
   font-size: 24px;
@@ -17,6 +20,11 @@ const StyledTableRow = styled(TableRow)`
   height: 40px;
   background-color: #f7f7f7;
   margin-bottom: 10px;
+  transition: background-color 100ms linear;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
 
   &:last-of-type {
     margin-bottom: 0;
@@ -39,11 +47,12 @@ const NearbyPlaces = ({ address }: { address: Address }) => {
     () => (
       <>
         {nearbyPlaces.map(({ id, name, address: { number, street, city, zip, country } }) => (
-          <StyledTableRow
-            key={id}
-            first={<Span>{name}</Span>}
-            second={<Span>{`${number} ${street}, ${city} ${zip}, ${country}`}</Span>}
-          />
+          <Button key={id}>
+            <StyledTableRow
+              first={<Span>{name}</Span>}
+              second={<Span>{`${number} ${street}, ${city} ${zip}, ${country}`}</Span>}
+            />
+          </Button>
         ))}
       </>
     ),

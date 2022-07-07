@@ -3,14 +3,14 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 const Header = styled.h2`
   font-size: 24px;
-  color: #2f2e43;
+  color: ${(props) => props.theme.colors.heading};
   margin: 0;
   padding: 0;
   margin-bottom: 10px;
 `;
 
 const Span = styled.span`
-  color: #6b6a7a;
+  color: ${(props) => props.theme.colors.font};
   word-wrap: break-word;
   font-size: 16px;
   line-height: 22px;

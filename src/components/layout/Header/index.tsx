@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { Path } from '../../../constants/Path';
+import LoadingSimulator from '../../LoadingSimulator';
 import logo from './logo.png';
 
 const StyledHeader = styled.header`
@@ -29,11 +30,16 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
+const StyledLoadingSimulator = styled(LoadingSimulator)`
+  margin-left: 20px;
+`;
+
 const Header = () => (
   <StyledHeader>
     <Logo src={logo} alt="DevOcean React Logo" />
     <Title>DevOcean React Task</Title>
     <StyledLink to={Path.Root}>Home page</StyledLink>
+    <StyledLoadingSimulator />
   </StyledHeader>
 );
 

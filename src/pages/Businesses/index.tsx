@@ -36,6 +36,7 @@ const StyledHeader = styled(TableRow)`
   background-color: white;
   align-items: center;
   transition: background-color 100ms linear;
+  margin: 0;
   margin-bottom: 10px;
   user-select: none;
 `;
@@ -51,9 +52,13 @@ const StyledContainer = styled(Container)`
   margin-top: 20px;
 `;
 
-const ScrollableContainer = styled(StyledContainer)`
+const ScrollableContainer = styled(Container)`
   max-height: 80vh;
   overflow-y: auto;
+`;
+
+const TableContent = styled(Container)`
+  position: relative;
 `;
 
 const NoDataMessage = () => <span>There is no businesses data</span>;
@@ -62,47 +67,41 @@ const BusinessesTable = ({ businesses }: { businesses: BusinessResume[] }) => {
   let navigate = useNavigate();
 
   return (
-    <>
+    <TableContent>
       <Header />
 
-      {businesses.map(({ id, name, description }: BusinessResume) => (
-        <Button key={id} onClick={() => navigate(Path.Business + `/${id}`)}>
-          <StyledDataRow name={name} description={description} />
-        </Button>
-      ))}
-    </>
+      <ScrollableContainer style={{ overflowY: 'auto', maxHeight: '80vh' }}>
+        {businesses.map(({ id, name, description }: BusinessResume) => (
+          <Button key={id} onClick={() => navigate(Path.Business + `/${id}`)}>
+            <StyledDataRow name={name} description={description} />
+          </Button>
+        ))}
+      </ScrollableContainer>
+    </TableContent>
   );
 };
 
-// TODO: Floating header
-// TODO: Pagination
-// TODO: Loading - placeholders & animations
-const BusinessesPage = () => {
+const Content = () => {
   const { data, loading, error } = useBusinesses();
 
   if (loading) {
-    return (
-      <StyledContainer>
-        <LoadingIndicator />
-      </StyledContainer>
-    );
+    return <LoadingIndicator />;
   }
 
   const businesses = data.businesses;
-
   if (error || !businesses?.length) {
-    return (
-      <StyledContainer>
-        <NoDataMessage />
-      </StyledContainer>
-    );
+    return <NoDataMessage />;
   }
 
-  return (
-    <ScrollableContainer>
-      <BusinessesTable businesses={businesses} />
-    </ScrollableContainer>
-  );
+  return <BusinessesTable businesses={businesses} />;
 };
+
+// TODO: Pagination
+// TODO: Loading - placeholders & animations
+const BusinessesPage = () => (
+  <StyledContainer>
+    <Content />
+  </StyledContainer>
+);
 
 export default BusinessesPage;

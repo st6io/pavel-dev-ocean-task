@@ -5,6 +5,7 @@ import { useBusinesses } from '../../hooks/use-businesses';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../../constants/Path';
 import TableRow from '../../components/TableRow';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 const HeaderLabel = styled.span`
   color: purple;
@@ -92,7 +93,7 @@ const BusinessesPage = () => {
   if (loading) {
     return (
       <StyledContainer>
-        <span>Loading...</span>
+        <LoadingIndicator />
       </StyledContainer>
     );
   }

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import LoadingIndicator from '../../components/LoadingIndicator';
 import NearbyPlaces from '../../components/NearbyPlaces';
 import Section from '../../components/SectionWithTitle';
 import { useBusiness } from '../../hooks/use-business';
@@ -39,7 +40,7 @@ const BusinessPage = () => {
   if (loading) {
     return (
       <StyledContainer>
-        <span>Loading...</span>
+        <LoadingIndicator />
       </StyledContainer>
     );
   }

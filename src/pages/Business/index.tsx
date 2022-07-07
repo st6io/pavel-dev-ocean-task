@@ -47,11 +47,12 @@ const BusinessPage = () => {
     );
   }
 
-  if (error || !data) {
+  if (error || !data || !data.business) {
     return <NotFoundPage />;
   }
 
-  const { address, email, image, phone, name, description } = data;
+  const { business } = data;
+  const { address, email, image, phone, name, description } = business;
   const { number, street, city, zip, country } = address;
 
   return (

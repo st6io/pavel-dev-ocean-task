@@ -33,7 +33,7 @@ const mockNearbyPlaces = [
 
 beforeEach(() => {
   (useBusiness as any).mockImplementation(() => ({
-    data: mockData,
+    data: { business: mockData },
     loading: false,
     error: false,
   }));
@@ -68,7 +68,7 @@ it('should render kind message when there is no such business', () => {
 
 it('should render kind message when there is an error', () => {
   (useBusiness as any).mockImplementation(() => ({
-    data: mockData,
+    data: { business: mockData },
     loading: false,
     error: new Error('something bad happened'),
   }));
@@ -80,7 +80,7 @@ it('should render kind message when there is an error', () => {
 
 it('should render a loading indicator while loading', () => {
   (useBusiness as any).mockImplementation(() => ({
-    data: mockData,
+    data: { business: mockData },
     loading: true,
     error: false,
   }));

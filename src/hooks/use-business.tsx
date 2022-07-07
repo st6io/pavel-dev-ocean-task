@@ -28,6 +28,6 @@ export const useBusiness = (id: Business['id']): QueryResult => {
 
   return {
     ...allBusinessResult,
-    data: business,
+    data: { business },
   };
 };

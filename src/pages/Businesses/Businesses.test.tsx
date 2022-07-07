@@ -45,6 +45,30 @@ it('should render kind message when there are no records', () => {
   expect(screen.getByText('There is no businesses data')).toBeInTheDocument();
 });
 
+it('should render kind message when there is an error', () => {
+  (useBusinesses as any).mockImplementation(() => ({
+    data: { businesses: mockData },
+    loading: false,
+    error: new Error('something bad happened'),
+  }));
+
+  render(<BusinessesPage />);
+
+  expect(screen.getByText('There is no businesses data')).toBeInTheDocument();
+});
+
+it('should render a loading indicator while loading', () => {
+  (useBusinesses as any).mockImplementation(() => ({
+    data: { businesses: mockData },
+    loading: true,
+    error: false,
+  }));
+
+  render(<BusinessesPage />);
+
+  expect(screen.getByText('Loading...')).toBeInTheDocument();
+});
+
 it('should navigate to business page on click', () => {
   render(<BusinessesPage />);
 

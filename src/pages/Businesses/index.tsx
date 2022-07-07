@@ -100,7 +100,7 @@ const BusinessesPage = () => {
 
   const businesses = data.businesses;
 
-  if (error || !businesses.length) {
+  if (error || !businesses?.length) {
     return (
       <StyledContainer>
         <NoDataMessage />

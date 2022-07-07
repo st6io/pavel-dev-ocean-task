@@ -66,6 +66,30 @@ it('should render kind message when there is no such business', () => {
   expect(screen.getByText("There's nothing here :(")).toBeInTheDocument();
 });
 
+it('should render kind message when there is an error', () => {
+  (useBusiness as any).mockImplementation(() => ({
+    data: mockData,
+    loading: false,
+    error: new Error('something bad happened'),
+  }));
+
+  render(<BusinessPage />);
+
+  expect(screen.getByText("There's nothing here :(")).toBeInTheDocument();
+});
+
+it('should render a loading indicator while loading', () => {
+  (useBusiness as any).mockImplementation(() => ({
+    data: mockData,
+    loading: true,
+    error: false,
+  }));
+
+  render(<BusinessPage />);
+
+  expect(screen.getByText('Loading...')).toBeInTheDocument();
+});
+
 describe('Styles', () => {
   it('should render image with correct styles', () => {
     render(<BusinessPage />);

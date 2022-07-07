@@ -1,11 +1,14 @@
 import { Container } from 'react-bootstrap';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
+
 import { BusinessResume } from '../../types/BusinessResume';
 import { useBusinesses } from '../../hooks/use-businesses';
-import { useNavigate } from 'react-router-dom';
 import { Path } from '../../constants/Path';
+
 import TableRow from '../../components/TableRow';
 import LoadingIndicator from '../../components/LoadingIndicator';
+import Button from '../../components/SimpleButton';
 
 const HeaderLabel = styled.span`
   color: purple;
@@ -25,19 +28,6 @@ const StyledDataRow = styled(DataRow)`
 
   &:hover {
     background-color: #f0f0f0;
-  }
-`;
-
-const StyledButton = styled.button`
-  width: 100%;
-  border: 0;
-  text-align: inherit;
-  padding: 0;
-
-  margin-bottom: 5px;
-
-  &:last-of-type {
-    margin-bottom: 0;
   }
 `;
 
@@ -76,9 +66,9 @@ const BusinessesTable = ({ businesses }: { businesses: BusinessResume[] }) => {
       <Header />
 
       {businesses.map(({ id, name, description }: BusinessResume) => (
-        <StyledButton key={id} onClick={() => navigate(Path.Business + `/${id}`)}>
+        <Button key={id} onClick={() => navigate(Path.Business + `/${id}`)}>
           <StyledDataRow name={name} description={description} />
-        </StyledButton>
+        </Button>
       ))}
     </>
   );

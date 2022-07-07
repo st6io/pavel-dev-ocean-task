@@ -34,13 +34,21 @@ const NearbyPlacesContainer = styled(ContentCol)`
 
 const BusinessPage = () => {
   const params = useParams();
-  const business = useBusiness(params.id as string);
+  const { loading, error, data } = useBusiness(params.id as string);
 
-  if (!business) {
+  if (loading) {
+    return (
+      <StyledContainer>
+        <span>Loading...</span>
+      </StyledContainer>
+    );
+  }
+
+  if (error || !data) {
     return <NotFoundPage />;
   }
 
-  const { address, email, image, phone, name, description } = business;
+  const { address, email, image, phone, name, description } = data;
   const { number, street, city, zip, country } = address;
 
   return (

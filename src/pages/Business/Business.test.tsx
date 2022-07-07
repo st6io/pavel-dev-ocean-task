@@ -32,7 +32,11 @@ const mockNearbyPlaces = [
 ];
 
 beforeEach(() => {
-  (useBusiness as any).mockImplementation(() => mockData);
+  (useBusiness as any).mockImplementation(() => ({
+    data: mockData,
+    loading: false,
+    error: false,
+  }));
   (useNearbyPlaces as any).mockImplementation(() => mockNearbyPlaces);
 });
 
@@ -51,7 +55,11 @@ it('should render the contact information', () => {
 });
 
 it('should render kind message when there is no such business', () => {
-  (useBusiness as any).mockImplementation(() => undefined);
+  (useBusiness as any).mockImplementation(() => ({
+    data: null,
+    loading: false,
+    error: false,
+  }));
 
   render(<BusinessPage />);
 

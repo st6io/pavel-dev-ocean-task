@@ -8,11 +8,11 @@ const Section = styled(BaseSkeleton)`
 
 const Image = styled(BaseSkeleton)`
   height: 350px;
-  margin-bottom: ${(props) => props.theme.spacePx[4]};
+  margin-bottom: ${({ theme }) => theme.spacePx[4]};
 `;
 
 const Skeleton = () => (
-  <Container>
+  <Container fluid>
     <Row>
       <Col>
         <Image />

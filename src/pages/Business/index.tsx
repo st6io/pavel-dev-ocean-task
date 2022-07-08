@@ -11,7 +11,8 @@ import Section from '../../components/SectionWithTitle';
 import Skeleton from './Skeleton';
 
 const StyledContainer = styled(Container)`
-  margin-top: ${(props) => props.theme.spacePx[6]};
+  margin-top: ${({ theme }) => theme.spacePx[6]};
+  max-width: ${({ theme }) => theme.contentMaxWidth};
 `;
 
 const Image = styled.img`
@@ -23,17 +24,16 @@ const Image = styled.img`
 `;
 
 const ContentCol = styled(Col)`
-  padding: ${(props) => props.theme.spacePx[2]};
+  padding: ${({ theme }) => theme.spacePx[2]};
 `;
 
 const InformationRow = styled(Row)`
-  max-width: 95%;
-  margin: auto;
-  margin-top: ${(props) => props.theme.spacePx[4]};
+  margin: 0;
+  margin-top: ${({ theme }) => theme.spacePx[4]};
 `;
 
 const NearbyPlacesContainer = styled(ContentCol)`
-  background-color: ${(props) => props.theme.colors.nearbyPlacesContainerBackground};
+  background-color: ${({ theme }) => theme.colors.nearbyPlacesContainerBackground};
 `;
 
 const BusinessPage = () => {

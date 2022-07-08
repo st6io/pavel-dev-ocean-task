@@ -6,7 +6,7 @@ const StyledButton = styled.button`
   text-align: inherit;
   padding: 0;
 
-  margin-bottom: ${(props) => props.theme.spacePx[1]};
+  margin-bottom: ${({ theme }) => theme.spacePx[1]};
 
   &:last-of-type {
     margin-bottom: 0;

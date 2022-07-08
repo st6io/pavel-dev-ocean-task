@@ -3,12 +3,12 @@ import BaseSkeleton from 'react-loading-skeleton';
 
 const Row = styled(BaseSkeleton)`
   height: 70px;
-  margin-bottom: ${(props) => props.theme.spacePx[1]};
+  margin-bottom: ${({ theme }) => theme.spacePx[1]};
 `;
 
 const Header = styled(BaseSkeleton)`
   height: 70px;
-  margin-bottom: ${(props) => props.theme.spacePx[2]};
+  margin-bottom: ${({ theme }) => theme.spacePx[2]};
 `;
 
 const numberOfRows = 10;

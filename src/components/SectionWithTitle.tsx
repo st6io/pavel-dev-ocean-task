@@ -2,18 +2,18 @@ import styled from '@emotion/styled';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const Header = styled.h2`
-  font-size: ${(props) => props.theme.fontSize[2]};
-  color: ${(props) => props.theme.colors.heading};
+  font-size: ${({ theme }) => theme.fontSize[2]};
+  color: ${({ theme }) => theme.colors.heading};
   margin: 0;
   padding: 0;
-  margin-bottom: ${(props) => props.theme.spacePx[2]};
+  margin-bottom: ${({ theme }) => theme.spacePx[2]};
 `;
 
 const Span = styled.span`
-  color: ${(props) => props.theme.colors.font};
+  color: ${({ theme }) => theme.colors.font};
   word-wrap: break-word;
-  font-size: ${(props) => props.theme.fontSize[1]};
-  line-height: ${(props) => props.theme.lineHeight[1]};
+  font-size: ${({ theme }) => theme.fontSize[1]};
+  line-height: ${({ theme }) => theme.lineHeight[1]};
 `;
 
 export interface SectionProps {

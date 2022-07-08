@@ -9,21 +9,21 @@ import TableRow from './TableRow';
 import Button from './SimpleButton';
 
 const Header = styled.h2`
-  font-size: ${(props) => props.theme.fontSize[2]};
-  color: ${(props) => props.theme.colors.heading};
+  font-size: ${({ theme }) => theme.fontSize[2]};
+  color: ${({ theme }) => theme.colors.heading};
   margin: 0;
   padding: 0;
-  margin-bottom: ${(props) => props.theme.spacePx[2]};
+  margin-bottom: ${({ theme }) => theme.spacePx[2]};
 `;
 
 const StyledTableRow = styled(TableRow)`
   height: 40px;
-  background-color: ${(props) => props.theme.colors.sectionRowBackground};
-  margin-bottom: ${(props) => props.theme.spacePx[2]};
+  background-color: ${({ theme }) => theme.colors.sectionRowBackground};
+  margin-bottom: ${({ theme }) => theme.spacePx[2]};
   transition: background-color 100ms linear;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.tableRowHover};
+    background-color: ${({ theme }) => theme.colors.tableRowHover};
   }
 
   &:last-of-type {
@@ -32,10 +32,10 @@ const StyledTableRow = styled(TableRow)`
 `;
 
 const Span = styled.span`
-  color: ${(props) => props.theme.colors.font};
+  color: ${({ theme }) => theme.colors.font};
   word-wrap: break-word;
-  font-size: ${(props) => props.theme.fontSize[0]};
-  line-height: ${(props) => props.theme.lineHeight[0]};
+  font-size: ${({ theme }) => theme.fontSize[0]};
+  line-height: ${({ theme }) => theme.lineHeight[0]};
 `;
 
 const NoDataMessage = () => <span>There's no data :(</span>;

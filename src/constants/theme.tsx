@@ -17,4 +17,5 @@ export const theme = {
   fontSize: ['14px', '16px', '24px'],
   //            0       1
   lineHeight: ['20px', '22px'],
+  contentMaxWidth: '2000px',
 };

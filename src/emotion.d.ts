@@ -15,5 +15,6 @@ declare module '@emotion/react' {
     spacePx: string[];
     fontSize: string[];
     lineHeight: string[];
+    contentMaxWidth: string;
   }
 }

@@ -9,6 +9,7 @@ import Button from './SimpleButton';
 import { useNavigate } from 'react-router-dom';
 import { Path } from '../constants/Path';
 import { NearbyPlaceSearch } from '../types/NearbyPlacesSearch';
+import { NearbyPlace } from '../types/NearbyPlace';
 
 const Header = styled.h2`
   font-size: ${({ theme }) => theme.fontSize[2]};
@@ -43,20 +44,23 @@ const Span = styled.span`
 const NoDataMessage = () => <span>There's no data :(</span>;
 
 const NearbyPlaces = ({ location, relativePlaceId }: NearbyPlaceSearch) => {
-  const nearbyPlaces = useNearbyPlaces({ location, relativePlaceId });
+  const { data } = useNearbyPlaces({ location, relativePlaceId });
   const navigate = useNavigate();
+  const { nearbyPlaces } = data;
 
   const Table = useCallback(
     () => (
       <>
-        {nearbyPlaces.map(({ id, name, address: { number, street, city, zip, country } }) => (
-          <Button key={id} onClick={() => navigate(Path.Business + `/${id}`)}>
-            <StyledTableRow
-              first={<Span>{name}</Span>}
-              second={<Span>{`${number} ${street}, ${city} ${zip}, ${country}`}</Span>}
-            />
-          </Button>
-        ))}
+        {nearbyPlaces.map(
+          ({ id, name, address: { number, street, city, zip, country } }: NearbyPlace) => (
+            <Button key={id} onClick={() => navigate(Path.Business + `/${id}`)}>
+              <StyledTableRow
+                first={<Span>{name}</Span>}
+                second={<Span>{`${number} ${street}, ${city} ${zip}, ${country}`}</Span>}
+              />
+            </Button>
+          ),
+        )}
       </>
     ),
     [nearbyPlaces, navigate],

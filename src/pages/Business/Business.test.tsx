@@ -38,7 +38,11 @@ beforeEach(() => {
     loading: false,
     error: false,
   }));
-  (useNearbyPlaces as any).mockImplementation(() => mockNearbyPlaces);
+  (useNearbyPlaces as any).mockImplementation(() => ({
+    data: {
+      nearbyPlaces: mockNearbyPlaces,
+    },
+  }));
 });
 
 it('should render the address in certain format', () => {
@@ -167,7 +171,11 @@ describe('Nearby Places', () => {
   });
 
   it('should render kind message when there are no nearby places', () => {
-    (useNearbyPlaces as any).mockImplementation(() => []);
+    (useNearbyPlaces as any).mockImplementation(() => ({
+      data: {
+        nearbyPlaces: [],
+      },
+    }));
 
     render(<BusinessPage />);
 

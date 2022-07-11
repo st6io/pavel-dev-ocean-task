@@ -1,3 +1,4 @@
+import { QueryResult } from '@apollo/client';
 import { Business } from '../types/Business';
 import { NearbyPlace } from '../types/NearbyPlace';
 import { NearbyPlaceSearch } from '../types/NearbyPlacesSearch';
@@ -9,15 +10,17 @@ const mapBusinessToNearbyPlace = (business: Business): NearbyPlace => ({
   id: business.id,
 });
 
-export const useNearbyPlaces = ({
-  relativePlaceId,
-  location,
-}: NearbyPlaceSearch): NearbyPlace[] => {
+export const useNearbyPlaces = ({ relativePlaceId, location }: NearbyPlaceSearch): QueryResult => {
   const allBusinessResult = useBusinesses();
 
   const sameCityBusinesses = (allBusinessResult.data?.businesses.filter(
     (b: Business) => relativePlaceId !== b.id && b.address.city === location.city,
   ) || []) as Business[];
 
-  return sameCityBusinesses.map(mapBusinessToNearbyPlace);
+  return {
+    ...allBusinessResult,
+    data: {
+      nearbyPlaces: sameCityBusinesses.map(mapBusinessToNearbyPlace),
+    },
+  };
 };

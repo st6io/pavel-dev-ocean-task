@@ -6,6 +6,8 @@ import { useNearbyPlaces } from '../hooks/use-nearby-places';
 
 import TableRow from './TableRow';
 import Button from './SimpleButton';
+import { useNavigate } from 'react-router-dom';
+import { Path } from '../constants/Path';
 import { NearbyPlaceSearch } from '../types/NearbyPlacesSearch';
 
 const Header = styled.h2`
@@ -42,12 +44,13 @@ const NoDataMessage = () => <span>There's no data :(</span>;
 
 const NearbyPlaces = ({ location, relativePlaceId }: NearbyPlaceSearch) => {
   const nearbyPlaces = useNearbyPlaces({ location, relativePlaceId });
+  const navigate = useNavigate();
 
   const Table = useCallback(
     () => (
       <>
         {nearbyPlaces.map(({ id, name, address: { number, street, city, zip, country } }) => (
-          <Button key={id}>
+          <Button key={id} onClick={() => navigate(Path.Business + `/${id}`)}>
             <StyledTableRow
               first={<Span>{name}</Span>}
               second={<Span>{`${number} ${street}, ${city} ${zip}, ${country}`}</Span>}
@@ -56,7 +59,7 @@ const NearbyPlaces = ({ location, relativePlaceId }: NearbyPlaceSearch) => {
         ))}
       </>
     ),
-    [nearbyPlaces],
+    [nearbyPlaces, navigate],
   );
 
   return (

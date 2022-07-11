@@ -59,7 +59,7 @@ const TableContent = styled(Container)`
 `;
 
 const BusinessesTable = ({ businesses }: { businesses: BusinessResume[] }) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <TableContent fluid>

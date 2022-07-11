@@ -1,35 +1,20 @@
 import { Address } from '../types/Address';
+import { Business } from '../types/Business';
 import { NearbyPlace } from '../types/NearbyPlace';
+import { useBusinesses } from './use-businesses';
 
-const address = {
-  number: '472-488',
-  street: 'Brixton Rd',
-  zip: 'SW9 SEH',
-  city: 'London',
-  country: 'United Kingdom',
+const mapBusinessToNearbyPlace = (business: Business): NearbyPlace => ({
+  address: business.address,
+  name: business.name,
+  id: business.id,
+});
+
+export const useNearbyPlaces = (location: Address): NearbyPlace[] => {
+  const allBusinessResult = useBusinesses();
+
+  const sameCityBusinesses = (allBusinessResult.data?.businesses.filter(
+    (b: Business) => b.address.city === location.city,
+  ) || []) as Business[];
+
+  return sameCityBusinesses.map(mapBusinessToNearbyPlace);
 };
-
-const dataMock = [
-  {
-    id: '1',
-    name: 'Caffè Nero',
-    address,
-  },
-  {
-    id: '2',
-    name: 'EAT.',
-    address,
-  },
-  {
-    id: '3',
-    name: 'Pret A Manger',
-    address,
-  },
-  {
-    id: '4',
-    name: 'Coffee Republic',
-    address,
-  },
-];
-
-export const useNearbyPlaces = (location: Address): NearbyPlace[] => dataMock;

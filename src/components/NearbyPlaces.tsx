@@ -3,10 +3,10 @@ import styled from '@emotion/styled';
 import { Container, Row } from 'react-bootstrap';
 
 import { useNearbyPlaces } from '../hooks/use-nearby-places';
-import { Address } from '../types/Address';
 
 import TableRow from './TableRow';
 import Button from './SimpleButton';
+import { NearbyPlaceSearch } from '../types/NearbyPlacesSearch';
 
 const Header = styled.h2`
   font-size: ${({ theme }) => theme.fontSize[2]};
@@ -40,8 +40,8 @@ const Span = styled.span`
 
 const NoDataMessage = () => <span>There's no data :(</span>;
 
-const NearbyPlaces = ({ address }: { address: Address }) => {
-  const nearbyPlaces = useNearbyPlaces(address);
+const NearbyPlaces = ({ location, relativePlaceId }: NearbyPlaceSearch) => {
+  const nearbyPlaces = useNearbyPlaces({ location, relativePlaceId });
 
   const Table = useCallback(
     () => (

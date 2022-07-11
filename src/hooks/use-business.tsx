@@ -10,6 +10,7 @@ export const useBusiness = (id: Business['id']): QueryResult => {
     id: `Business:${id}`, // TODO: check if this can be automatically constructed
     fragment: gql`
       fragment BusinessData on Business {
+        id
         name
         description
         phone

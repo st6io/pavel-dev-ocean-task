@@ -53,7 +53,7 @@ const BusinessPage = () => {
   }
 
   const { business } = data;
-  const { address, email, image, phone, name, description } = business;
+  const { address, email, image, phone, name, description, id } = business;
   const { number, street, city, zip, country } = address;
 
   return (
@@ -82,7 +82,7 @@ const BusinessPage = () => {
         </Col>
 
         <NearbyPlacesContainer>
-          <NearbyPlaces address={address} />
+          <NearbyPlaces location={address} relativePlaceId={id} />
         </NearbyPlacesContainer>
       </InformationRow>
     </StyledContainer>
